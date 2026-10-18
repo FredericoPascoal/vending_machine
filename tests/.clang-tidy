@@ -1,0 +1,13 @@
+---
+# Tests inherit the root config but relax checks that GoogleTest macros
+# (TEST, EXPECT_*) trigger by design.
+InheritParentConfig: true
+Checks: >
+  -cppcoreguidelines-avoid-non-const-global-variables,
+  -cppcoreguidelines-owning-memory,
+  -cppcoreguidelines-special-member-functions,
+  -readability-function-cognitive-complexity,
+  -cert-err58-cpp,
+  -modernize-use-trailing-return-type,
+  -readability-identifier-naming
+...

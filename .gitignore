@@ -1,0 +1,37 @@
+# Build output (CMake presets put everything under build/)
+build/
+cmake-build-*/
+out/
+
+# Symlink some people create at the root for IDEs
+/compile_commands.json
+
+# Compiled artefacts (in case of an in-source build by mistake)
+*.o
+*.a
+*.so
+*.out
+CMakeCache.txt
+CMakeFiles/
+Testing/
+
+# Runtime data written by the program (stock persistence)
+*.csv
+!tests/data/*.csv
+
+# Debugging / profiling
+core
+core.*
+vgcore.*
+callgrind.out.*
+massif.out.*
+perf.data*
+
+# Editors / OS
+.vscode/
+!.vscode/extensions.json
+.idea/
+*.swp
+.cache/
+.DS_Store
+Thumbs.db
