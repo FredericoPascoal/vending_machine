@@ -83,10 +83,13 @@ _TBD_
 
 ### Price representation
 
-* **Decision**: We chose to represent all monetary values and prices as standard signed 64-bit integers (`long long`) counting the total amount in cents (e.g., \$1.00 is stored as 100).
+### Architectural Decision: Currency and Price Representation
+
+* **Decision**: We chose to represent all monetary values and prices as standard fixed-width signed 64-bit integers (`std::int64_t`) counting the total amount in cents (e.g., 1.00 EUR is stored as 100).
 * **Alternatives considered**: We evaluated using floating-point numbers (`double`) for direct decimal representation, as well as unsigned integers (`unsigned int`) since prices are inherently non-negative.
-* **Rationale**: Floating-point numbers fail due to binary precision limitations, incorrectly rendering 10 accumulated dimes as `0.99999999999999989` instead of a solid 1.0. Unsigned integers are also dangerous because any negative transaction or calculation (such as a math mistake calculating change: `50 - 100`) triggers an underflow, wrapping the value around to a catastrophic number like `4294967246`.
-* **Consequences**: By choosing cents as integers, we guarantee absolute mathematical precision for all financial operations, but we now require a custom formatting function to divide the internal value by 100 and properly print it to the user as a decimal currency (e.g., displaying `100` as `1,00 €`).
+* **Rationale**: Floating-point numbers fail due to binary precision limitations, incorrectly rendering 10 accumulated dimes as `0.99999999999999989` instead of a solid 1.00. Unsigned integers are also dangerous because any negative transaction or calculation (such as a math mistake calculating change: `50 - 100`) triggers an underflow, wrapping the value around to a catastrophic number like `4294967246`.
+* **Consequences**: By choosing cents as integers, we guarantee absolute mathematical precision and cross-platform type safety, but we now require a custom formatting function to divide the internal value by 100 and properly print it to conform with REQ-009/010 (e.g., displaying `105` as `1.05 EUR`).
+
 
 ## Bug log
 
