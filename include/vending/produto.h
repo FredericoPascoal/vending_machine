@@ -9,7 +9,7 @@ namespace vending { // 📂 Cria a "gaveta" (namespace) para organizar o código
     using Centimos = std::int64_t;
 
     // ENUM CLASS: Catálogo fechado de erros lógicos. Nenhum = 0 é o sinal de "sucesso".
-    enum class ErroCriacaoProduto {
+    enum class ErroCriacaoProduto : std::uint8_t {
     Nenhum = 0,          // success
     IdInvalido,          // REQ-003
     NomeInvalido,        // REQ-004
@@ -28,15 +28,15 @@ namespace vending { // 📂 Cria a "gaveta" (namespace) para organizar o código
 
         // MÉTODO VIRTUAL PURO: O "= 0" diz que a mãe não sabe o código, obrigando as filhas a programá-lo.
         // O "const" garante que quem chamar esta função não vai alterar os dados do produto.
-        virtual std::string descricao() const = 0;
+        [[nodiscard]] virtual std::string descricao() const = 0;
 
         // GETTER (Nome): Outro método de LEITURA para obter o nome com segurança de fora da classe.
-        const std::string& getNome() const;
+       [[nodiscard]] const std::string& getNome() const;
 
         // GETTER (Preço): Método público de LEITURA. Permite saber o preço sem aceder à variável direta.
         // O "const" no fim tranca a função, impedindo-a de modificar o objeto (garante a imutabilidade).
-        Centimos getPreco() const;
-        const std::string& getId() const;         // 🌟 JUNTADO ID: Número pequeno -> por valor [1]
+        [[nodiscard]] Centimos getPreco() const;
+        [[nodiscard]] const std::string& getId() const;         // 🌟 JUNTADO ID: Número pequeno -> por valor [1]
 
         // NOTA: NÃO HÁ SETTERS AQUI! Retirar os métodos de alteração (setters) é o que torna o produto imutável.
 
