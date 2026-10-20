@@ -20,7 +20,7 @@ add_executable(vending_tests
 
 target_link_libraries(vending_tests PRIVATE
     vending_project_options
-    # vending_core          # uncomment once src/ exists
+    vending_core
     GTest::gtest_main
 )
 

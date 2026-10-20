@@ -54,9 +54,8 @@ endif()
 # ---------------------------------------------------------------------------
 # Production code
 # ---------------------------------------------------------------------------
-# The core library will live in src/ once the first class exists (Produto).
-# Then uncomment the line below; src/CMakeLists.txt will define `vending_core`.
-# add_subdirectory(src)
+# src/CMakeLists.txt defines the `vending_core` library.
+add_subdirectory(src)
 
 # ---------------------------------------------------------------------------
 # Tests
